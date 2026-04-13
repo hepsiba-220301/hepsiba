@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Parking System</title>
+
+<style>
+
+/* GOOGLE FONT STYLE */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+    --primary: #2563eb;
+    --secondary: #1e40af;
+    --glass: rgba(255, 255, 255, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #dbeafe, #eff6ff);
+    min-height: 100vh;
+}
+
+/* NAVBAR */
+nav {
+    backdrop-filter: blur(10px);
+    background: var(--glass);
+    color: #1e3a8a;
+    padding: 18px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* MAIN LAYOUT */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 40px;
+    gap: 30px;
+}
+
+/* IMAGE */
+.image-section {
+    flex: 1;
+    position: relative;
+}
+
+.image-section img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: transform 0.5s ease;
+}
+
+.image-section:hover img {
+    transform: scale(1.05);
+}
+
+/* DETAILS CARD */
+.details {
+    flex: 1;
+    padding: 25px;
+    border-radius: 20px;
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.details:hover {
+    transform: translateY(-5px);
+}
+
+.details h2 {
+    margin-bottom: 15px;
+    color: var(--secondary);
+}
+
+/* INFO BOX */
+.info-box {
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.3);
+    transition: 0.3s;
+}
+
+.info-box:hover {
+    transform: scale(1.03);
+}
+
+/* SLOTS GRID */
+.slots {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.slot {
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.available {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.occupied {
+    background: linear-gradient(135deg, #ef4444, #b91c1c);
+}
+
+.slot:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* BUTTON */
+button {
+    margin-top: 20px;
+    padding: 12px;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+/* SECTION CARDS */
+.section {
+    margin: 30px;
+    padding: 25px;
+    border-radius: 20px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.section:hover {
+    transform: translateY(-5px);
+}
+
+.section h3 {
+    margin-bottom: 10px;
+    color: var(--primary);
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: var(--secondary);
+    color: white;
+    margin-top: 30px;
+}
+
+/* RESPONSIVE */
+@media(max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>🚗 Smart Parking System</nav>
+
+<div class="container">
+
+    <!-- IMAGE -->
+    <div class="image-section">
+        <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a" alt="Parking">
+    </div>
+
+    <!-- DETAILS -->
+    <div class="details">
+        <h2>Parking Overview</h2>
+
+        <div class="info-box">Total Slots</div>
+        <div class="info-box">Available Slots: <span id="availableCount"></span></div>
+        <div class="info-box">AC Parking Slots</div>
+        <div class="info-box">Non-AC Parking Slots</div>
+
+        <h3>Live Slot Status</h3>
+
+        <div class="slots" id="slotContainer"></div>
+
+        <button onclick="bookSlot()">Book Selected Slot</button>
+    </div>
+
+</div>
+
+<div class="section">
+    <h3>💰
