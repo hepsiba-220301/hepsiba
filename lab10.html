@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>jQuery Demo</title>
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+body { font-family: Arial; padding: 20px; }
+.box {
+    width: 150px;
+    height: 150px;
+    background: blue;
+    margin: 10px;
+    color: white;
+    text-align: center;
+    line-height: 150px;
+}
+.highlight {
+    background: orange !important;
+}
+</style>
+</head>
+<body>
+<h2>🔹 jQuery Demo (DOM, Events, Traversing, Effects)</h2>
+<!-- DOM ELEMENT -->
+<div class="box">Box</div>
+<button id="changeText">Change Text</button>
+<button id="changeColor">Change Color</button>
+<button id="hideBox">Hide</button>
+<button id="showBox">Show</button>
+<button id="toggleBox">Toggle</button>
+<button id="fadeBox">Fade</button>
+<button id="slideBox">Slide</button>
+<hr>
+<ul id="list">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+</ul>
+<button id="addItem">Add Item</button>
+<button id="removeItem">Remove Item</button>
+<script>
+$(document).ready(function(){
+    $("#changeText").click(function(){
+        $(".box").text("Updated!");
+    });
+    $("#changeColor").click(function(){
+        $(".box").css("background", "green");
+    });
+    $(".box").click(function(){
+        alert("Box Clicked!");
+    });
+    $(".box").mouseenter(function(){
+        $(this).addClass("highlight");
+    });
+    $(".box").mouseleave(function(){
+        $(this).removeClass("highlight");
+    });
+    $("#hideBox").click(function(){
+        $(".box").hide();
+    });
+    $("#showBox").click(function(){
+        $(".box").show();
+    });
+    $("#toggleBox").click(function(){
+        $(".box").toggle();
+    });
+    $("#fadeBox").click(function(){
+        $(".box").fadeToggle();
+    });
+    $("#slideBox").click(function(){
+        $(".box").slideToggle();
+    });
+    $("#list li").click(function(){
+        $(this).css("color", "red");         // current
+        $(this).next().css("color", "blue"); // next
+        $(this).prev().css("color", "green");// previous
+        $(this).parent().css("border", "2px solid black"); // parent
+    });
+    $("#addItem").click(function(){
+        $("#list").append("<li>New Item</li>");
+    });
+    $("#removeItem").click(function(){
+        $("#list li:last").remove();
+    });
+});
+</script>
+</body>
+</html>
