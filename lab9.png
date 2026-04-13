@@ -1,0 +1,41 @@
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+git config --global init.defaultBranch main
+git config --list
+git init
+git status
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/username/repo.git
+git branch -M main
+git push -u origin main
+git pull origin main
+git checkout -b feature-login
+git add .
+git commit -m "Added login feature"
+git checkout main
+git pull origin main
+git merge feature-login
+git push origin main
+git branch              
+git branch new-branch   
+git checkout new-branch 
+git checkout -b test    
+git branch -d test      
+git log
+git log --oneline
+git log --graph 
+--allgit restore file.txt
+git status
+git add .
+git commit -m "Resolved merge conflict"
+git stash
+git stash pop
+git stash list
+git clone https://github.com/user/repo.git
+git tag v1.0
+git push origin v1.0
+node_modules/
+vendor/
+.env
+*.log
