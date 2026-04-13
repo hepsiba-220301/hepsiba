@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Parking System</title>
+
+<style>
+body { font-family: Arial; margin: 0; background: #eef2f7; }
+
+/* NAVBAR */
+nav {
+    background: #1e3a8a;
+    color: white;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* LOGIN */
+.login-box {
+    width: 300px;
+    margin: 80px auto;
+    background: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+/* MAIN */
+.container { display: none; padding: 20px; }
+
+/* INFO BAR */
+.info {
+    margin-bottom: 15px;
+}
+
+/* SEARCH */
+.search-box { margin-bottom: 10px; }
+
+/* STATUS MESSAGE */
+.status {
+    margin: 10px 0;
+    padding: 8px;
+    background: #dbeafe;
+    border-radius: 5px;
+}
+
+/* SLOTS */
+.slots {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.slot {
+    padding: 15px;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.available { background: green; }
+.occupied { background: red; }
+
+.selected {
+    border: 3px solid black;
+}
+
+.highlight {
+    border: 3px solid yellow;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div>🚗 Smart Parking</div>
+    <div>
+        <span id="time"></span> |
+        <span id="userDisplay"></span>
+        <button onclick="logout()">Logout</button>
+    </div>
+</nav>
+
+<!-- LOGIN -->
+<div class="login-box" id="loginBox">
+    <h3>Login</h3>
+    <input type="text" id="username" placeholder="Username"><br><br>
+    <input type="password" id="password" placeholder="Password"><br><br>
+    <button onclick="login()">Login</button>
+</div>
+
+<!-- MAIN -->
+<div class="container" id="mainContent">
+
+    <div class="info">
+        Available: <span id="available"></span> |
+        Occupied: <span id="occupied"></span>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search Slot (A1...)">
+        <button onclick="searchSlot()">Search</button>
+    </div>
+
+    <!-- STATUS -->
+    <div class="status" id="statusMsg">Select a slot</div>
+
+    <!-- BUTTONS -->
+    <button onclick="bookSlot()">Book Slot</button>
+    <button onclick="cancelSlot()">Cancel Booking</button>
+
+    <!-- SLOTS -->
+    <div class="slots" id="slotContainer"></div>
+
+</div>
+
+<script>
+
+let selected = null;
+let slots = JSON.parse(localStorage.getItem("slots")) || [];
+
+// LOGIN
+function login(){
+    let user = username.value;
+    let pass = password.value;
+
+    if(user && pass){
+        loginBox.style.display="none";
+        mainContent.style.display="block";
+        userDisplay.innerText="Welcome "+user;
+    }
+}
+
+// LOGOUT
+function logout(){
+    localStorage.clear();
+    location.reload();
+}
+
+// CLOCK
+setInterval(()=>{
+    let now = new Date();
+    time.innerText = now.toLocaleTimeString();
+},1000);
+
+// CREATE SLOTS
+let container = document.getElementById("slotContainer");
+
+function initSlots(){
+    container.innerHTML="";
+
+    for(let i=1;i<=20;i++){
+        let div = document.createElement("div");
+        div.classList.add("slot");
+
+        let status = slots[i] || (i<=10 ? "available":"occupied");
+
+        div.classList.add(status);
+        div.innerText = (status==="available"?"A":"O")+i;
+
+        div.onclick = ()=>{
+            document.querySelectorAll(".slot").forEach(s=>s.classList.remove("selected"));
+            div.classList.add("selected");
+            selected = i;
+            statusMsg.innerText = "Selected Slot: "+div.innerText;
+        };
+
+        container.appendChild(div);
+    }
+
+    updateCounts();
+}
+
+initSlots();
+
+// BOOK SLOT
+function bookSlot(){
+    if(!selected) return statusMsg.innerText="Select a slot first";
+
+    if(slots[selected]==="occupied"){
+        return statusMsg.innerText="Slot already occupied";
+    }
+
+    slots[selected]="occupied";
+    localStorage.setItem("slots", JSON.stringify(slots));
+
+    statusMsg.innerText="Slot "+selected+" booked!";
+    initSlots();
+}
+
+// CANCEL SLOT
+function cancelSlot(){
+    if(!selected) return statusMsg.innerText="Select a
