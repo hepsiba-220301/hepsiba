@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hepsiba Resume</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* HERO SECTION */
+.hero {
+    padding: 60px 0;
+}
+
+.hero h1 {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.hero p {
+    color: gray;
+}
+
+/* PROFILE IMAGE */
+.profile-img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+/* BUTTONS */
+.btn-custom {
+    margin-right: 10px;
+}
+
+/* SECTION */
+.section {
+    padding: 50px 0;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    transition: 0.3s;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">Hepsiba</a>
+    <div>
+      <a class="nav-link d-inline" href="#">Summary</a>
+      <a class="nav-link d-inline" href="#">Skills</a>
+      <a class="nav-link d-inline" href="#">Projects</a>
+      <a class="nav-link d-inline" href="#">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="container hero">
+  <div class="row align-items-center">
+
+    <!-- LEFT -->
+    <div class="col-md-7">
+      <h1>Hepsiba</h1>
+      <h5 class="text-muted">Web Developer</h5>
+
+      <p class="mt-3">
+        📧 hepsiba-22@gmail.com <br>
+        📍 India
+      </p>
+
+      <p>
+        Passionate about building responsive web applications using HTML, CSS, JavaScript, Bootstrap, and PHP.
+      </p>
+
+      <button class="btn btn-primary btn-custom">Contact</button>
+      <button class="btn btn-outline-secondary">Projects</button>
+    </div>
+
+    <!-- RIGHT IMAGE -->
+    <div class="col-md-5">
+      <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7" class="profile-img">
+    </div>
+
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="container section">
+    <h2>Skills</h2>
+    <div class="row mt-3">
+        <div class="col-md-3"><div class="card p-3 text-center">HTML</div></div>
+        <div class="col-md-3"><div class="card p-3 text-center">CSS</div></div>
+        <div class="col-md-3"><div class="card p-3 text-center">JavaScript</div></div>
+        <div class="col-md-3"><div class="card p-3 text-center">Bootstrap</div></div>
+    </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="container section">
+    <h2>Projects</h2>
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <div class="card p-3">
+                <h5>Smart Parking System</h5>
+                <p>Developed an interactive parking system with booking and slot tracking.</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card p-3">
+                <h5>Data Visualization</h5>
+                <p>Created charts and analysis using Python tools.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CONTACT -->
+<div class="container section">
+    <h2>Contact</h2>
+    <form>
+        <input type="text" class="form-control mb-2" placeholder="Your Name">
+        <input type="email" class="form-control mb-2" placeholder="Your Email">
+        <textarea class="form-control mb-2" placeholder="Message"></textarea>
+        <button class="btn btn-primary">Send</button>
+    </form>
+</div>
+
+<!-- FOOTER -->
+<footer class="text-center bg-dark text-white p-3">
+    © 2026 Hepsiba Resume
+</footer>
+
+</body>
+</html>
